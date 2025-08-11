@@ -1,0 +1,288 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="calculator-name" content="Currency Converter">
+    <meta name="calculator-description" content="Convert between different currencies with real-time exchange rates.">
+    <meta name="calculator-category" content="finance">
+    <title>Currency Converter - Calculator Hub</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .calculator-container {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .calculator-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .calculator-header h1 {
+            color: #667eea;
+            margin-bottom: 0.5rem;
+            font-size: 2rem;
+        }
+
+        .calculator-header p {
+            color: #666;
+            font-size: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .currency-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 1rem;
+            align-items: end;
+        }
+
+        .swap-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: background 0.3s ease;
+            margin: 1rem 0;
+        }
+
+        .swap-btn:hover {
+            background: #5a6fd8;
+        }
+
+        .result-container {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+
+        .result-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+
+        .exchange-rate {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: background 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        .note {
+            background: #e3f2fd;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: #1976d2;
+        }
+
+        @media (max-width: 480px) {
+            .calculator-container {
+                padding: 1.5rem;
+                margin: 10px;
+            }
+            
+            .currency-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="../index.html" class="back-btn">← Back to Home</a>
+    
+    <div class="calculator-container">
+        <div class="calculator-header">
+            <h1 data-calculator-name>Currency Converter</h1>
+            <p data-calculator-description>Convert between different currencies with real-time exchange rates.</p>
+        </div>
+
+        <div class="form-group">
+            <label for="amount">Amount</label>
+            <input type="number" id="amount" placeholder="Enter amount" step="0.01" value="100">
+        </div>
+
+        <div class="currency-row">
+            <div class="form-group">
+                <label for="fromCurrency">From</label>
+                <select id="fromCurrency">
+                    <option value="USD">USD - US Dollar</option>
+                    <option value="EUR">EUR - Euro</option>
+                    <option value="GBP">GBP - British Pound</option>
+                    <option value="JPY">JPY - Japanese Yen</option>
+                    <option value="AUD">AUD - Australian Dollar</option>
+                    <option value="CAD">CAD - Canadian Dollar</option>
+                    <option value="CHF">CHF - Swiss Franc</option>
+                    <option value="CNY">CNY - Chinese Yuan</option>
+                    <option value="INR">INR - Indian Rupee</option>
+                    <option value="BRL">BRL - Brazilian Real</option>
+                </select>
+            </div>
+        </div>
+
+        <button class="swap-btn" onclick="swapCurrencies()">⇅ Swap</button>
+
+        <div class="currency-row">
+            <div class="form-group">
+                <label for="toCurrency">To</label>
+                <select id="toCurrency">
+                    <option value="USD">USD - US Dollar</option>
+                    <option value="EUR" selected>EUR - Euro</option>
+                    <option value="GBP">GBP - British Pound</option>
+                    <option value="JPY">JPY - Japanese Yen</option>
+                    <option value="AUD">AUD - Australian Dollar</option>
+                    <option value="CAD">CAD - Canadian Dollar</option>
+                    <option value="CHF">CHF - Swiss Franc</option>
+                    <option value="CNY">CNY - Chinese Yuan</option>
+                    <option value="INR">INR - Indian Rupee</option>
+                    <option value="BRL">BRL - Brazilian Real</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="result-container">
+            <div class="result-value" id="resultValue">85.00 EUR</div>
+            <div class="exchange-rate" id="exchangeRate">1 USD = 0.85 EUR</div>
+        </div>
+
+        <div class="note">
+            <strong>Note:</strong> This calculator uses approximate exchange rates for demonstration purposes. For actual transactions, please check current market rates.
+        </div>
+    </div>
+
+    <script>
+        // Sample exchange rates (in a real application, these would come from an API)
+        const exchangeRates = {
+            USD: { EUR: 0.85, GBP: 0.73, JPY: 110, AUD: 1.35, CAD: 1.25, CHF: 0.92, CNY: 6.45, INR: 74.5, BRL: 5.2 },
+            EUR: { USD: 1.18, GBP: 0.86, JPY: 129, AUD: 1.59, CAD: 1.47, CHF: 1.08, CNY: 7.6, INR: 87.8, BRL: 6.1 },
+            GBP: { USD: 1.37, EUR: 1.16, JPY: 150, AUD: 1.85, CAD: 1.71, CHF: 1.26, CNY: 8.85, INR: 102, BRL: 7.1 },
+            JPY: { USD: 0.009, EUR: 0.0078, GBP: 0.0067, AUD: 0.012, CAD: 0.011, CHF: 0.0084, CNY: 0.058, INR: 0.68, BRL: 0.047 },
+            AUD: { USD: 0.74, EUR: 0.63, GBP: 0.54, JPY: 81.5, CAD: 0.93, CHF: 0.68, CNY: 4.78, INR: 55.2, BRL: 3.85 },
+            CAD: { USD: 0.80, EUR: 0.68, GBP: 0.58, JPY: 88, AUD: 1.08, CHF: 0.74, CNY: 5.16, INR: 59.6, BRL: 4.16 },
+            CHF: { USD: 1.09, EUR: 0.93, GBP: 0.79, JPY: 119, AUD: 1.47, CAD: 1.35, CNY: 7.03, INR: 81.2, BRL: 5.67 },
+            CNY: { USD: 0.155, EUR: 0.132, GBP: 0.113, JPY: 17.1, AUD: 0.209, CAD: 0.194, CHF: 0.142, INR: 11.55, BRL: 0.806 },
+            INR: { USD: 0.0134, EUR: 0.0114, GBP: 0.0098, JPY: 1.48, AUD: 0.0181, CAD: 0.0168, CHF: 0.0123, CNY: 0.0866, BRL: 0.0698 },
+            BRL: { USD: 0.192, EUR: 0.164, GBP: 0.141, JPY: 21.3, AUD: 0.26, CAD: 0.24, CHF: 0.176, CNY: 1.24, INR: 14.32 }
+        };
+
+        function convertCurrency() {
+            const amount = parseFloat(document.getElementById('amount').value);
+            const fromCurrency = document.getElementById('fromCurrency').value;
+            const toCurrency = document.getElementById('toCurrency').value;
+
+            if (isNaN(amount) || amount <= 0) {
+                return;
+            }
+
+            let convertedAmount;
+            let rate;
+
+            if (fromCurrency === toCurrency) {
+                convertedAmount = amount;
+                rate = 1;
+            } else if (exchangeRates[fromCurrency] && exchangeRates[fromCurrency][toCurrency]) {
+                rate = exchangeRates[fromCurrency][toCurrency];
+                convertedAmount = amount * rate;
+            } else {
+                // Fallback calculation
+                rate = 1;
+                convertedAmount = amount;
+            }
+
+            document.getElementById('resultValue').textContent = 
+                `${convertedAmount.toFixed(2)} ${toCurrency}`;
+            document.getElementById('exchangeRate').textContent = 
+                `1 ${fromCurrency} = ${rate.toFixed(4)} ${toCurrency}`;
+        }
+
+        function swapCurrencies() {
+            const fromSelect = document.getElementById('fromCurrency');
+            const toSelect = document.getElementById('toCurrency');
+            
+            const tempValue = fromSelect.value;
+            fromSelect.value = toSelect.value;
+            toSelect.value = tempValue;
+            
+            convertCurrency();
+        }
+
+        // Event listeners
+        document.getElementById('amount').addEventListener('input', convertCurrency);
+        document.getElementById('fromCurrency').addEventListener('change', convertCurrency);
+        document.getElementById('toCurrency').addEventListener('change', convertCurrency);
+
+        // Initial calculation
+        convertCurrency();
+    </script>
+</body>
+</html>

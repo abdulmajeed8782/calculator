@@ -1,0 +1,339 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="calculator-name" content="Grade Calculator">
+    <meta name="calculator-description" content="Calculate your GPA and final grades based on your assignment and test scores.">
+    <meta name="calculator-category" content="education">
+    <title>Grade Calculator - Calculator Hub</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .calculator-container {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            max-width: 800px;
+            margin: 0 auto;
+            margin-top: 60px;
+        }
+
+        .calculator-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .calculator-header h1 {
+            color: #667eea;
+            margin-bottom: 0.5rem;
+            font-size: 2rem;
+        }
+
+        .calculator-header p {
+            color: #666;
+            font-size: 1rem;
+        }
+
+        .grade-input-section {
+            margin-bottom: 2rem;
+        }
+
+        .input-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr auto;
+            gap: 1rem;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .input-row input, .input-row select {
+            padding: 0.8rem;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .input-row input:focus, .input-row select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .remove-btn {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 0.8rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .remove-btn:hover {
+            background: #c82333;
+        }
+
+        .add-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .add-btn:hover {
+            background: #218838;
+        }
+
+        .calculate-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            margin-bottom: 1.5rem;
+        }
+
+        .calculate-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .results {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 1.5rem;
+            display: none;
+        }
+
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .result-item:last-child {
+            border-bottom: none;
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: #667eea;
+        }
+
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: background 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        .grade-scale {
+            background: #e3f2fd;
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .grade-scale h3 {
+            color: #1976d2;
+            margin-bottom: 0.5rem;
+        }
+
+        .grade-scale p {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 0.3rem;
+        }
+
+        @media (max-width: 768px) {
+            .input-row {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+            }
+            
+            .calculator-container {
+                padding: 1.5rem;
+                margin-top: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="../index.html" class="back-btn">← Back to Home</a>
+    
+    <div class="calculator-container">
+        <div class="calculator-header">
+            <h1 data-calculator-name>Grade Calculator</h1>
+            <p data-calculator-description>Calculate your GPA and final grades based on your assignment and test scores.</p>
+        </div>
+
+        <div class="grade-scale">
+            <h3>Grading Scale</h3>
+            <p>A: 90-100% (4.0) | B: 80-89% (3.0) | C: 70-79% (2.0) | D: 60-69% (1.0) | F: Below 60% (0.0)</p>
+        </div>
+
+        <div class="grade-input-section">
+            <div id="gradeInputs">
+                <div class="input-row">
+                    <input type="text" placeholder="Assignment name" class="assignment-name">
+                    <input type="number" placeholder="Score" class="score" min="0" max="100" step="0.1">
+                    <input type="number" placeholder="Weight %" class="weight" min="0" max="100" step="0.1">
+                    <button type="button" class="remove-btn" onclick="removeRow(this)">Remove</button>
+                </div>
+            </div>
+            
+            <button type="button" class="add-btn" onclick="addRow()">+ Add Assignment</button>
+            <button type="button" class="calculate-btn" onclick="calculateGrades()">Calculate Grades</button>
+        </div>
+
+        <div class="results" id="results">
+            <div class="result-item">
+                <span>Weighted Average:</span>
+                <span id="weightedAverage">0%</span>
+            </div>
+            <div class="result-item">
+                <span>Letter Grade:</span>
+                <span id="letterGrade">F</span>
+            </div>
+            <div class="result-item">
+                <span>GPA Points:</span>
+                <span id="gpaPoints">0.0</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function addRow() {
+            const gradeInputs = document.getElementById('gradeInputs');
+            const newRow = document.createElement('div');
+            newRow.className = 'input-row';
+            newRow.innerHTML = `
+                <input type="text" placeholder="Assignment name" class="assignment-name">
+                <input type="number" placeholder="Score" class="score" min="0" max="100" step="0.1">
+                <input type="number" placeholder="Weight %" class="weight" min="0" max="100" step="0.1">
+                <button type="button" class="remove-btn" onclick="removeRow(this)">Remove</button>
+            `;
+            gradeInputs.appendChild(newRow);
+        }
+
+        function removeRow(button) {
+            const rows = document.querySelectorAll('.input-row');
+            if (rows.length > 1) {
+                button.parentElement.remove();
+            } else {
+                alert('You must have at least one assignment.');
+            }
+        }
+
+        function calculateGrades() {
+            const rows = document.querySelectorAll('.input-row');
+            let totalWeightedScore = 0;
+            let totalWeight = 0;
+            let hasValidData = false;
+
+            for (let row of rows) {
+                const score = parseFloat(row.querySelector('.score').value);
+                const weight = parseFloat(row.querySelector('.weight').value);
+
+                if (!isNaN(score) && !isNaN(weight) && score >= 0 && score <= 100 && weight > 0) {
+                    totalWeightedScore += (score * weight / 100);
+                    totalWeight += weight / 100;
+                    hasValidData = true;
+                }
+            }
+
+            if (!hasValidData) {
+                alert('Please enter valid scores and weights for at least one assignment.');
+                return;
+            }
+
+            if (Math.abs(totalWeight - 1) > 0.01) {
+                const confirmation = confirm(`Warning: Your weights total ${(totalWeight * 100).toFixed(1)}% instead of 100%. Do you want to continue?`);
+                if (!confirmation) return;
+            }
+
+            const weightedAverage = totalWeight > 0 ? totalWeightedScore / totalWeight : 0;
+            const letterGrade = getLetterGrade(weightedAverage);
+            const gpaPoints = getGPAPoints(weightedAverage);
+
+            document.getElementById('weightedAverage').textContent = `${weightedAverage.toFixed(2)}%`;
+            document.getElementById('letterGrade').textContent = letterGrade;
+            document.getElementById('gpaPoints').textContent = gpaPoints.toFixed(2);
+
+            document.getElementById('results').style.display = 'block';
+            document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function getLetterGrade(percentage) {
+            if (percentage >= 90) return 'A';
+            if (percentage >= 80) return 'B';
+            if (percentage >= 70) return 'C';
+            if (percentage >= 60) return 'D';
+            return 'F';
+        }
+
+        function getGPAPoints(percentage) {
+            if (percentage >= 90) return 4.0;
+            if (percentage >= 80) return 3.0;
+            if (percentage >= 70) return 2.0;
+            if (percentage >= 60) return 1.0;
+            return 0.0;
+        }
+
+        // Add some sample data for demonstration
+        document.addEventListener('DOMContentLoaded', function() {
+            const firstRow = document.querySelector('.input-row');
+            firstRow.querySelector('.assignment-name').value = 'Midterm Exam';
+            firstRow.querySelector('.score').value = '85';
+            firstRow.querySelector('.weight').value = '30';
+
+            addRow();
+            const secondRow = document.querySelectorAll('.input-row')[1];
+            secondRow.querySelector('.assignment-name').value = 'Final Project';
+            secondRow.querySelector('.score').value = '92';
+            secondRow.querySelector('.weight').value = '40';
+
+            addRow();
+            const thirdRow = document.querySelectorAll('.input-row')[2];
+            thirdRow.querySelector('.assignment-name').value = 'Homework Average';
+            thirdRow.querySelector('.score').value = '88';
+            thirdRow.querySelector('.weight').value = '30';
+        });
+    </script>
+</body>
+</html>
