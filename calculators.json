@@ -1,5 +1,11 @@
 [
   {
+    "name": "Automation Test Calculator",
+    "description": "A simple word and character counter to test the automation script.",
+    "category": "testing",
+    "fileName": "Automation-Test-Calculator.html"
+  },
+  {
     "name": "Basic Calculator",
     "description": "Perform basic arithmetic operations like addition, subtraction, multiplication, and division.",
     "category": "math",
