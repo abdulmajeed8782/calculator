@@ -17,8 +17,10 @@ class CalculatorHub {
      */
     async loadCalculators() {
         try {
-            // This is the new code: Fetch the list from the JSON file.
-            const response = await fetch('calculators.json');
+            // This path is updated to work correctly on GitHub Pages.
+            // It now includes the repository name in the path.
+            const response = await fetch('/calculator/calculators.json');
+            
             if (!response.ok) {
                 throw new Error(`Failed to load calculators.json. Status: ${response.status}`);
             }
