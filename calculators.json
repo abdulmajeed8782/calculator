@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Automation Test Calculator",
+    "description": "A simple word and character counter to test the automation script.",
+    "category": "testing",
+    "fileName": "Automation-Test-Calculator.html"
+  },
+  {
+    "name": "Basic Calculator",
+    "description": "Perform basic arithmetic operations like addition, subtraction, multiplication, and division.",
+    "category": "math",
+    "fileName": "basic-calculator.html"
+  },
+  {
+    "name": "BMI Calculator",
+    "description": "Calculate your Body Mass Index (BMI) to determine if your weight is in a healthy range.",
+    "category": "health",
+    "fileName": "bmi-calculator.html"
+  },
+  {
+    "name": "Currency Converter",
+    "description": "Convert between different currencies with real-time exchange rates.",
+    "category": "finance",
+    "fileName": "currency-converter.html"
+  },
+  {
+    "name": "Grade Calculator",
+    "description": "Calculate your GPA and final grades based on your assignment and test scores.",
+    "category": "education",
+    "fileName": "grade-calculator.html"
+  },
+  {
+    "name": "Loan Calculator",
+    "description": "Calculate monthly payments, total interest, and payment schedules for loans and mortgages.",
+    "category": "finance",
+    "fileName": "loan-calculator.html"
+  },
+  {
+    "name": "Percentage Calculator",
+    "description": "Calculate percentages, percentage increase/decrease, and find what percentage one number is of another.",
+    "category": "math",
+    "fileName": "percentage-calculator.html"
+  },
+  {
+    "name": "Tip Calculator",
+    "description": "Calculate tips and split bills among multiple people for restaurants and services.",
+    "category": "finance",
+    "fileName": "tip-calculator.html"
+  }
+]
