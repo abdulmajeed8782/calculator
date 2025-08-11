@@ -1,0 +1,19 @@
+{
+  "name": "calculator-hub",
+  "version": "1.0.0",
+  "description": "A collection of online calculators.",
+  "main": "assets/js/main.js",
+  "scripts": {
+    "generate": "node generate-manifest.js"
+  },
+  "keywords": [
+    "calculator",
+    "hub",
+    "static"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "jsdom": "^24.0.0"
+  }
+}
