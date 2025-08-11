@@ -9,6 +9,10 @@ on:
 
 jobs:
   build:
+    # This permissions block is the fix! It grants write access to the action.
+    permissions:
+      contents: write
+
     # Use the latest stable version of Ubuntu as the operating system for the runner.
     runs-on: ubuntu-latest
 
@@ -42,4 +46,3 @@ jobs:
           commit_message: "docs: auto-generate calculator manifest"
           # The specific file to watch for changes.
           file_pattern: "calculators.json"
-
