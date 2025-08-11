@@ -1,0 +1,106 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator Hub - Your One-Stop Calculator Collection</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1>Calculator Hub</h1>
+            </div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#calculators">Calculators</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-menu-toggle">☰</div>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="container">
+                <h1>Welcome to Calculator Hub</h1>
+                <p>Your comprehensive collection of online calculators for every need</p>
+                
+                <div class="search-container">
+                    <input type="text" id="searchInput" placeholder="Search for calculators..." class="search-input">
+                    <button class="search-btn">🔍</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="calculators" class="calculators-section">
+            <div class="container">
+                <h2>Available Calculators</h2>
+                <div id="calculatorGrid" class="calculator-grid">
+                    <!-- Calculators will be dynamically loaded here -->
+                </div>
+                <div id="noResults" class="no-results" style="display: none;">
+                    <p>No calculators found matching your search.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about-section">
+            <div class="container">
+                <h2>About Calculator Hub</h2>
+                <p>Calculator Hub is your go-to destination for a wide variety of online calculators. Whether you need basic arithmetic, advanced mathematical calculations, or specialized tools for specific fields, we've got you covered.</p>
+            </div>
+        </section>
+
+        <section id="contact" class="contact-section">
+            <div class="container">
+                <h2>Contact Us</h2>
+                <p>Have suggestions for new calculators or found an issue? We'd love to hear from you!</p>
+                <div class="contact-info">
+                    <p>Email: contact@calculatorhub.com</p>
+                    <p>Phone: (555) 123-4567</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Calculator Hub</h3>
+                    <p>Making calculations simple and accessible for everyone.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#calculators">Calculators</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Categories</h3>
+                    <ul>
+                        <li><a href="#math">Math</a></li>
+                        <li><a href="#finance">Finance</a></li>
+                        <li><a href="#health">Health</a></li>
+                        <li><a href="#conversion">Conversion</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Calculator Hub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
