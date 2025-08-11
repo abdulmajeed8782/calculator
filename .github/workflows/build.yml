@@ -1,0 +1,45 @@
+# Name for this GitHub Action workflow, visible in the "Actions" tab of your repo.
+name: Generate Calculator Manifest
+
+# This configures the action to run automatically on every push to the 'main' branch.
+on:
+  push:
+    branches:
+      - main  # Or 'master', depending on your repository's default branch.
+
+jobs:
+  build:
+    # Use the latest stable version of Ubuntu as the operating system for the runner.
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checks out your repository's code so the job can access it.
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      # Step 2: Sets up the specified version of Node.js in the environment.
+      # The 'cache' option speeds up future builds by caching dependencies.
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      # Step 3: Installs the project dependencies (like jsdom) listed in package.json.
+      - name: Install Dependencies
+        run: npm install
+
+      # Step 4: Runs your custom script to generate the calculators.json file.
+      - name: Generate Manifest File
+        run: node generate-manifest.js
+
+      # Step 5: Automatically commits the updated calculators.json file back to your repo.
+      # This action only runs if the file_pattern has changed.
+      - name: Commit and Push if Changed
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          # The message for the automatic commit.
+          commit_message: "docs: auto-generate calculator manifest"
+          # The specific file to watch for changes.
+          file_pattern: "calculators.json"
+
